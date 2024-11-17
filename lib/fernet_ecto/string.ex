@@ -25,5 +25,10 @@ defmodule Fernet.Ecto.String do
   @doc """
   Decrypt a value loaded from the database.
   """
-  def load(ciphertext), do: decrypt(ciphertext)
+  def load(ciphertext) do
+    case decrypt(ciphertext) do
+      {:ok, plaintext} -> {:ok, plaintext}
+      _ -> :error
+    end
+  end
 end

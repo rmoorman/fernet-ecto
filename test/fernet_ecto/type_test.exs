@@ -39,19 +39,15 @@ defmodule Fernet.Ecto.TypeTest do
     {:ok, "plaintext"} = Fernet.Ecto.Type.decrypt(ciphertext)
   end
 
-  test "Fernet.Ecto.Type.decrypt raises an exception if no available key is able to decrypt the ciphertext" do
+  test "Fernet.Ecto.Type.decrypt returns an error if the given key is not able to decrypt the ciphertext" do
     {:ok, ciphertext} = Fernet.Ecto.Type.encrypt("plaintext")
     Application.put_env(:fernet_ecto, :key, @key)
-    assert_raise RuntimeError, "incorrect mac", fn ->
-      Fernet.Ecto.Type.decrypt(ciphertext)
-    end
+    assert {:error, "incorrect mac"} = Fernet.Ecto.Type.decrypt(ciphertext)
   end
 
-  test "Fernet.Ecto.Type.decrypt raises an exception if none of the available keys are able to decrypt the ciphertext" do
+  test "Fernet.Ecto.Type.decrypt returns an error if none of the available keys are able to decrypt the ciphertext" do
     {:ok, ciphertext} = Fernet.Ecto.Type.encrypt("plaintext")
     Application.put_env(:fernet_ecto, :key, [@key])
-    assert_raise RuntimeError, "incorrect mac", fn ->
-      Fernet.Ecto.Type.decrypt(ciphertext)
-    end
+    assert {:error, "invalid key"} = Fernet.Ecto.Type.decrypt(ciphertext)
   end
 end
