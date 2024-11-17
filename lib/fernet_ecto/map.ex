@@ -2,9 +2,9 @@ defmodule Fernet.Ecto.Map do
   @moduledoc """
   An Ecto type for Fernet-encrypted maps.
   """
-  import Fernet.Ecto.Type
+  use Ecto.Type
 
-  @behaviour Ecto.Type
+  import Fernet.Ecto.Type
 
   @doc """
   Fernet-encrypted data is stored as a binary in the database.
