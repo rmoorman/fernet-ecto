@@ -22,9 +22,7 @@ defmodule Fernet.Ecto.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:ecto,
-                    :fernetex,
-                    :logger]]
+    [extra_applications: [:logger, :crypto]]
   end
 
   # Dependencies can be Hex packages:
