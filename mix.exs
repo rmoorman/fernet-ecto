@@ -10,7 +10,7 @@ defmodule Fernet.Ecto.Mixfile do
      version: @version,
      name: "fernet-ecto",
      homepage_url: "https://github.com/jkakar/fernet-ecto",
-     elixir: "~> 1.4",
+     elixir: "~> 1.7",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      docs: [source_ref: "v#{@version}", main: "Fernet.Ecto",
