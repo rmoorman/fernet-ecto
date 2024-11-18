@@ -6,7 +6,7 @@ defmodule Fernet.Ecto.StringTest do
   end
 
   test "Fernet.Ecto.String.type is always :binary" do
-    assert Fernet.Ecto.String.type == :binary
+    assert Fernet.Ecto.String.type() == :binary
   end
 
   test "Fernet.Ecto.String.cast ensures that only binary and string values are accepted" do

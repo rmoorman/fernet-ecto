@@ -6,7 +6,7 @@ defmodule Fernet.Ecto.MapTest do
   end
 
   test "Fernet.Ecto.Map.type is always :binary" do
-    assert Fernet.Ecto.Map.type == :binary
+    assert Fernet.Ecto.Map.type() == :binary
   end
 
   test "Fernet.Ecto.Map.cast ensures that only map values are accepted" do

@@ -9,10 +9,11 @@ defmodule Fernet.Ecto.TypeTest do
     # Reset the application environment between tests.
     default_key = Application.get_env(:fernet_ecto, :key)
     default_ttl = Application.get_env(:fernet_ecto, :ttl)
-    on_exit fn ->
+
+    on_exit(fn ->
       Application.put_env(:fernet_ecto, :key, default_key)
       Application.put_env(:fernet_ecto, :ttl, default_ttl)
-    end
+    end)
   end
 
   test "Fernet.Ecto.Type.encrypt uses the fernet key defined in the configuration to encrypt plaintext into ciphertext while Fernet.Ecto.Type.decrypt does the opposite" do
@@ -27,6 +28,7 @@ defmodule Fernet.Ecto.TypeTest do
     Application.put_env(:fernet_ecto, :key, [@key, old_key])
     {:ok, ciphertext} = Fernet.Ecto.Type.encrypt("plaintext")
     {:ok, "plaintext"} = Fernet.verify(ciphertext, key: @key)
+
     assert_raise RuntimeError, "incorrect mac", fn ->
       Fernet.verify!(ciphertext, key: old_key)
     end

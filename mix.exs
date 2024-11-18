@@ -4,18 +4,23 @@ defmodule Fernet.Ecto.Mixfile do
   @version "1.3.0"
 
   def project do
-    [app: :fernet_ecto,
-     description: "Fernet-encrypted fields for Ecto",
-     package: package(),
-     version: @version,
-     name: "fernet-ecto",
-     homepage_url: "https://github.com/jkakar/fernet-ecto",
-     elixir: "~> 1.7",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     docs: [source_ref: "v#{@version}", main: "Fernet.Ecto",
-            source_url: "https://github.com/jkakar/fernet-ecto"],
-     deps: deps()]
+    [
+      app: :fernet_ecto,
+      description: "Fernet-encrypted fields for Ecto",
+      package: package(),
+      version: @version,
+      name: "fernet-ecto",
+      homepage_url: "https://github.com/jkakar/fernet-ecto",
+      elixir: "~> 1.7",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      docs: [
+        source_ref: "v#{@version}",
+        main: "Fernet.Ecto",
+        source_url: "https://github.com/jkakar/fernet-ecto"
+      ],
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application
@@ -45,9 +50,13 @@ defmodule Fernet.Ecto.Mixfile do
   end
 
   defp package do
-    [maintainers: ["Jamu Kakar"],
-     licenses: ["Apache 2.0"],
-     links: %{"GitHub" => "https://github.com/jkakar/fernet-ecto",
-              "Docs" => "http://hexdocs.pm/fernet_ecto/#{@version}/"}]
+    [
+      maintainers: ["Jamu Kakar"],
+      licenses: ["Apache 2.0"],
+      links: %{
+        "GitHub" => "https://github.com/jkakar/fernet-ecto",
+        "Docs" => "http://hexdocs.pm/fernet_ecto/#{@version}/"
+      }
+    ]
   end
 end
