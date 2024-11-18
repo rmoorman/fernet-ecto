@@ -10,7 +10,7 @@ defmodule Fernet.Ecto.Mixfile do
      version: @version,
      name: "fernet-ecto",
      homepage_url: "https://github.com/jkakar/fernet-ecto",
-     elixir: "~> 1.4",
+     elixir: "~> 1.7",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      docs: [source_ref: "v#{@version}", main: "Fernet.Ecto",
@@ -37,7 +37,7 @@ defmodule Fernet.Ecto.Mixfile do
   defp deps do
     [
       {:earmark, "~> 1.4", only: [:dev]},
-      {:ex_doc, "~> 0.21.2", only: [:dev]},
+      {:ex_doc, "~> 0.34", only: [:dev]},
       {:ecto, "~> 2.2 or ~> 3.0"},
       # {:fernetex, "~> 0.3.1"}
       {:fernetex, github: "rmoorman/kennyp.fernetex", branch: "to-be-master", override: true}
