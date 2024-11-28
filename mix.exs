@@ -1,7 +1,7 @@
 defmodule Fernet.Ecto.Mixfile do
   use Mix.Project
 
-  @version "1.3.0"
+  @version "2.0.0-rc.0"
 
   def project do
     [
@@ -32,14 +32,13 @@ defmodule Fernet.Ecto.Mixfile do
       {:earmark, "~> 1.4", only: [:dev]},
       {:ex_doc, "~> 0.34", only: [:dev]},
       {:ecto, "~> 3.0"},
-      # {:fernetex, "~> 0.3.1"}
-      {:fernetex, github: "rmoorman/kennyp.fernetex", branch: "to-be-master", override: true}
+      {:fernetex, "~> 0.5.0"}
     ]
   end
 
   defp package do
     [
-      maintainers: ["Jamu Kakar"],
+      maintainers: ["Jamu Kakar", "Rico Moorman"],
       licenses: ["Apache 2.0"],
       links: %{
         "GitHub" => "https://github.com/jkakar/fernet-ecto",
