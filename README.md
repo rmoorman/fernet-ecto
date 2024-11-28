@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/jkakar/fernet-ecto.svg?branch=master)](https://travis-ci.org/jkakar/fernet-ecto)
 # Fernet.Ecto
 
 `Fernet.Ecto` defines `Ecto.Type`-based fields that automatically
