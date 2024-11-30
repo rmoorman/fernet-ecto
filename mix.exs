@@ -1,52 +1,50 @@
 defmodule Fernet.Ecto.Mixfile do
   use Mix.Project
 
-  @version "1.3.0"
+  @version "2.0.0-rc.0"
+  @repo_url "https://github.com/rmoorman/fernet-ecto"
 
   def project do
-    [app: :fernet_ecto,
-     description: "Fernet-encrypted fields for Ecto",
-     package: package(),
-     version: @version,
-     name: "fernet-ecto",
-     homepage_url: "https://github.com/jkakar/fernet-ecto",
-     elixir: "~> 1.4",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     docs: [source_ref: "v#{@version}", main: "Fernet.Ecto",
-            source_url: "https://github.com/jkakar/fernet-ecto"],
-     deps: deps()]
+    [
+      app: :fernet_ecto,
+      description: "Fernet-encrypted fields for Ecto",
+      package: package(),
+      version: @version,
+      name: "fernet-ecto",
+      homepage_url: @repo_url,
+      elixir: "~> 1.7",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      docs: [
+        source_ref: "v#{@version}",
+        main: "Fernet.Ecto",
+        source_url: @repo_url
+      ],
+      deps: deps()
+    ]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type "mix help compile.app" for more information
   def application do
-    [applications: [:ecto,
-                    :fernetex,
-                    :logger]]
+    [extra_applications: [:logger, :crypto]]
   end
 
-  # Dependencies can be Hex packages:
-  #
-  #   {:mydep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
-  #
-  # Type "mix help deps" for more examples and options
   defp deps do
-    [{:earmark, "~> 1.4", only: [:dev]},
-     {:ex_doc, "~> 0.21.2", only: [:dev]},
-     {:ecto, "~> 2.2 or ~> 3.0"},
-     {:fernetex, "~> 0.3.1"}]
+    [
+      {:earmark, "~> 1.4", only: [:dev]},
+      {:ex_doc, "~> 0.34", only: [:dev]},
+      {:ecto, "~> 3.2"},
+      {:fernetex, "~> 0.5.0"}
+    ]
   end
 
   defp package do
-    [maintainers: ["Jamu Kakar"],
-     licenses: ["Apache 2.0"],
-     links: %{"GitHub" => "https://github.com/jkakar/fernet-ecto",
-              "Docs" => "http://hexdocs.pm/fernet_ecto/#{@version}/"}]
+    [
+      maintainers: ["Rico Moorman"],
+      licenses: ["Apache 2.0"],
+      links: %{
+        "GitHub" => @repo_url,
+        "Docs" => "http://hexdocs.pm/fernet_ecto/#{@version}/"
+      }
+    ]
   end
 end

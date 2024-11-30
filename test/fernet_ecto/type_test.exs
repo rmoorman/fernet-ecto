@@ -9,10 +9,11 @@ defmodule Fernet.Ecto.TypeTest do
     # Reset the application environment between tests.
     default_key = Application.get_env(:fernet_ecto, :key)
     default_ttl = Application.get_env(:fernet_ecto, :ttl)
-    on_exit fn ->
+
+    on_exit(fn ->
       Application.put_env(:fernet_ecto, :key, default_key)
       Application.put_env(:fernet_ecto, :ttl, default_ttl)
-    end
+    end)
   end
 
   test "Fernet.Ecto.Type.encrypt uses the fernet key defined in the configuration to encrypt plaintext into ciphertext while Fernet.Ecto.Type.decrypt does the opposite" do
@@ -27,6 +28,7 @@ defmodule Fernet.Ecto.TypeTest do
     Application.put_env(:fernet_ecto, :key, [@key, old_key])
     {:ok, ciphertext} = Fernet.Ecto.Type.encrypt("plaintext")
     {:ok, "plaintext"} = Fernet.verify(ciphertext, key: @key)
+
     assert_raise RuntimeError, "incorrect mac", fn ->
       Fernet.verify!(ciphertext, key: old_key)
     end
@@ -39,19 +41,15 @@ defmodule Fernet.Ecto.TypeTest do
     {:ok, "plaintext"} = Fernet.Ecto.Type.decrypt(ciphertext)
   end
 
-  test "Fernet.Ecto.Type.decrypt raises an exception if no available key is able to decrypt the ciphertext" do
+  test "Fernet.Ecto.Type.decrypt returns an error if the given key is not able to decrypt the ciphertext" do
     {:ok, ciphertext} = Fernet.Ecto.Type.encrypt("plaintext")
     Application.put_env(:fernet_ecto, :key, @key)
-    assert_raise RuntimeError, "incorrect mac", fn ->
-      Fernet.Ecto.Type.decrypt(ciphertext)
-    end
+    assert {:error, "incorrect mac"} = Fernet.Ecto.Type.decrypt(ciphertext)
   end
 
-  test "Fernet.Ecto.Type.decrypt raises an exception if none of the available keys are able to decrypt the ciphertext" do
+  test "Fernet.Ecto.Type.decrypt returns an error if none of the available keys are able to decrypt the ciphertext" do
     {:ok, ciphertext} = Fernet.Ecto.Type.encrypt("plaintext")
     Application.put_env(:fernet_ecto, :key, [@key])
-    assert_raise RuntimeError, "incorrect mac", fn ->
-      Fernet.Ecto.Type.decrypt(ciphertext)
-    end
+    assert {:error, "invalid key"} = Fernet.Ecto.Type.decrypt(ciphertext)
   end
 end

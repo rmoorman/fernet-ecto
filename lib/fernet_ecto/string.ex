@@ -2,9 +2,9 @@ defmodule Fernet.Ecto.String do
   @moduledoc """
   An Ecto type for Fernet-encrypted strings.
   """
-  import Fernet.Ecto.Type
+  use Ecto.Type
 
-  @behaviour Ecto.Type
+  import Fernet.Ecto.Type
 
   @doc """
   Fernet-encrypted data is stored as a binary in the database.
@@ -25,5 +25,10 @@ defmodule Fernet.Ecto.String do
   @doc """
   Decrypt a value loaded from the database.
   """
-  def load(ciphertext), do: decrypt(ciphertext)
+  def load(ciphertext) do
+    case decrypt(ciphertext) do
+      {:ok, plaintext} -> {:ok, plaintext}
+      _ -> :error
+    end
+  end
 end
