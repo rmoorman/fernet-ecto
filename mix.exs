@@ -40,7 +40,7 @@ defmodule Fernet.Ecto.Mixfile do
   defp package do
     [
       maintainers: ["Rico Moorman"],
-      licenses: ["Apache 2.0"],
+      licenses: ["Apache-2.0"],
       links: %{
         "GitHub" => @repo_url,
         "Docs" => "http://hexdocs.pm/fernet_ecto/#{@version}/"
