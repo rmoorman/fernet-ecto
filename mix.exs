@@ -2,6 +2,7 @@ defmodule Fernet.Ecto.Mixfile do
   use Mix.Project
 
   @version "2.0.0-rc.0"
+  @repo_url "https://github.com/rmoorman/fernet-ecto"
 
   def project do
     [
@@ -10,14 +11,14 @@ defmodule Fernet.Ecto.Mixfile do
       package: package(),
       version: @version,
       name: "fernet-ecto",
-      homepage_url: "https://github.com/jkakar/fernet-ecto",
+      homepage_url: @repo_url,
       elixir: "~> 1.7",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       docs: [
         source_ref: "v#{@version}",
         main: "Fernet.Ecto",
-        source_url: "https://github.com/jkakar/fernet-ecto"
+        source_url: @repo_url
       ],
       deps: deps()
     ]
@@ -38,10 +39,10 @@ defmodule Fernet.Ecto.Mixfile do
 
   defp package do
     [
-      maintainers: ["Jamu Kakar", "Rico Moorman"],
+      maintainers: ["Rico Moorman"],
       licenses: ["Apache 2.0"],
       links: %{
-        "GitHub" => "https://github.com/jkakar/fernet-ecto",
+        "GitHub" => @repo_url,
         "Docs" => "http://hexdocs.pm/fernet_ecto/#{@version}/"
       }
     ]
